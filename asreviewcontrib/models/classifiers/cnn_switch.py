@@ -63,7 +63,7 @@ class CNNSwitch(BaseTrainClassifier):
 
     def __init__(self,
                  learning_rate=0.01,
-                 epochs=2,
+                 epochs=60,
                  batch_size=32,
                  shuffle=True,
                  class_weight=30.0):
@@ -117,10 +117,10 @@ class CNNSwitch(BaseTrainClassifier):
         self.input_dim=None
         self.switched = False
 
-        self.delta=0.03
-        self.patience=20
-        self.n_trials = 50
-        self.switchpoint = 750
+        self.delta=0.04
+        self.patience=15
+        self.n_trials = 80
+        self.switchpoint = 500
 
 
     def fit(self, X, y):
@@ -152,11 +152,7 @@ class CNNSwitch(BaseTrainClassifier):
             keras_model = _create_network(
                 input_dim = self.input_dim, 
                 nlayers=self.parameters["nlayers"],
-                nfilters1=self.parameters["nfilters1"],      
-                nfilters2=self.parameters["nfilters2"],      
-                nfilters3=self.parameters["nfilters3"],      
-                nfilters4=self.parameters["nfilters4"],      
-                nfilters5=self.parameters["nfilters5"],     
+                nfilters=self.parameters["nfilters"],
                 learning_rate = self.learning_rate, 
                 verbose = self.verbose)
 
@@ -180,26 +176,18 @@ class CNNSwitch(BaseTrainClassifier):
     def hpo(self):
         def objective(trial):
     
-            #HPO function
-            nlayers = trial.suggest_int("nlayers",2,5)
-            nfilters1 = trial.suggest_int("nfilters1",2,100)
-            nfilters2 = trial.suggest_int("nfilters2",nfilters1,100)
-            nfilters3 = trial.suggest_int("nfilters3",nfilters2,100)
-            nfilters4 = trial.suggest_int("nfilters4",nfilters3,200)
-            nfilters5 = trial.suggest_int("nfilters5",nfilters4,200)
-        
+            nlayers = trial.suggest_int("nlayers",3,6)
+            nfilters = trial.suggest_int("nfilters",50,220)
+
             self.input_dim = self.X.shape[1]
 
             keras_model = _create_network(
                 input_dim = self.input_dim, 
-                nlayers=nlayers,
-                nfilters1=nfilters1,      
-                nfilters2=nfilters2,      
-                nfilters3=nfilters3,      
-                nfilters4=nfilters4,      
-                nfilters5=nfilters5,     
+                nlayers=nlayers,  
+                nfilters = nfilters,   
                 learning_rate = self.learning_rate, 
                 verbose = self.verbose)
+
 
             self._model = KerasClassifier(keras_model, verbose=self.verbose)
             self.earlystop = EarlyStopping(monitor='loss', mode='min', min_delta = self.delta, patience = self.patience, restore_best_weights= True)
@@ -247,93 +235,101 @@ class CNNSwitch(BaseTrainClassifier):
             foo = self._model.predict_proba(self._add_dim(X))
         return foo
 
-def _create_network(
-                        input_dim,
+def _create_network(input_dim,
                         nlayers,
-                        nfilters1,      
-                        nfilters2,      
-                        nfilters3,      
-                        nfilters4,      
-                        nfilters5,      
-                        learning_rate=0.01,
+                        nfilters,      
+                        learning_rate=0.1,
                         verbose=0):
-
+  
 
     def model_wrapper():
         
         backend.clear_session()
 
-        model = Sequential()
+        model = Sequential()       
 
-        if nlayers == 2:
-            
-            #Block 1
-            model.add(Conv1D(input_shape = (input_dim, 1), filters = nfilters1, kernel_size = 2, activation='relu'))
-            model.add(MaxPool1D(pool_size = 3))
-            model.add(Dropout(0.2))
-            #Block 2       
-            model.add(Conv1D(filters = nfilters2, kernel_size = 2, activation='relu'))
-            model.add(MaxPool1D(pool_size = 3))
-            model.add(Dropout(0.2))
         
         if nlayers == 3:
-            
             #Block 1
-            model.add(Conv1D(input_shape = (input_dim, 1), filters = nfilters1, kernel_size = 2, activation='relu'))
+            model.add(Conv1D(input_shape = (input_dim, 1), filters = nfilters, kernel_size = 2, activation='relu'))
             model.add(MaxPool1D(pool_size = 2))
             model.add(Dropout(0.2))
             #Block 2       
-            model.add(Conv1D(filters = nfilters2, kernel_size = 2, activation='relu'))
-            model.add(MaxPool1D(pool_size = 2))
+            model.add(Conv1D(filters = nfilters, kernel_size = 2, activation='relu'))
             model.add(Dropout(0.2))
             #Block 3
-            model.add(Conv1D(filters = nfilters3, kernel_size = 2, activation='relu'))
+            model.add(Conv1D(filters = nfilters, kernel_size = 2, activation='relu'))
             model.add(MaxPool1D(pool_size = 2))
-            model.add(Dropout(0.2))        
+            model.add(Dropout(0.2))     
         
         if nlayers == 4:
-            
             #Block 1
-            model.add(Conv1D(input_shape = (input_dim, 1), filters = nfilters1, kernel_size = 2, activation='relu'))
+            model.add(Conv1D(input_shape = (input_dim, 1), filters = nfilters, kernel_size = 2, activation='relu'))
             model.add(MaxPool1D(pool_size = 2))
             model.add(Dropout(0.2))
             #Block 2       
-            model.add(Conv1D(filters = nfilters2, kernel_size = 2, activation='relu'))
-            model.add(MaxPool1D(pool_size = 2))
+            model.add(Conv1D(filters = nfilters, kernel_size = 2, activation='relu'))
             model.add(Dropout(0.2))
             #Block 3
-            model.add(Conv1D(filters = nfilters3, kernel_size = 2, activation='relu'))
+            model.add(Conv1D(filters = nfilters, kernel_size = 2, activation='relu'))
             model.add(MaxPool1D(pool_size = 2))
             model.add(Dropout(0.2))
             #Block 4      
-            model.add(Conv1D(filters = nfilters4, kernel_size = 2, activation='relu'))
-            model.add(MaxPool1D(pool_size = 2))
+            model.add(Conv1D(filters = nfilters, kernel_size = 2, activation='relu'))
             model.add(Dropout(0.2))        
 
         if nlayers == 5:
             
             #Block 1
-            model.add(Conv1D(input_shape = (input_dim, 1), filters = nfilters1, kernel_size = 2, activation='relu'))
+            model.add(Conv1D(input_shape = (input_dim, 1), filters = nfilters, kernel_size = 2, activation='relu'))
             model.add(MaxPool1D(pool_size = 2))
             model.add(Dropout(0.2))
+
             #Block 2       
-            model.add(Conv1D(filters = nfilters2, kernel_size = 2, activation='relu'))
-            model.add(MaxPool1D(pool_size = 2))
+            model.add(Conv1D(filters = nfilters, kernel_size = 2, activation='relu'))
             model.add(Dropout(0.2))
+            
             #Block 3
-            model.add(Conv1D(filters = nfilters3, kernel_size = 2, activation='relu'))
+            model.add(Conv1D(filters = nfilters, kernel_size = 2, activation='relu'))
             model.add(MaxPool1D(pool_size = 2))
             model.add(Dropout(0.2))
             
             #Block 4      
-            model.add(Conv1D(filters = nfilters4, kernel_size = 2, activation='relu'))
-            model.add(MaxPool1D(pool_size = 2))
-            model.add(Dropout(0.2))       
+            model.add(Conv1D(filters = nfilters, kernel_size = 2, activation='relu'))
+            model.add(Dropout(0.2))    
+
             #Block 5     
-            model.add(Conv1D(filters = nfilters5, kernel_size = 2, activation='relu'))
+            model.add(Conv1D(filters = nfilters, kernel_size = 2, activation='relu'))
             model.add(MaxPool1D(pool_size = 2))
             model.add(Dropout(0.2))      
-        
+
+        if nlayers == 6:
+            
+            #Block 1
+            model.add(Conv1D(input_shape = (input_dim, 1), filters = nfilters, kernel_size = 2, activation='relu'))
+            model.add(MaxPool1D(pool_size = 2))
+            model.add(Dropout(0.2))
+            #Block 2       
+            model.add(Conv1D(filters = nfilters, kernel_size = 2, activation='relu'))
+            model.add(Dropout(0.2))
+            #Block 3
+            model.add(Conv1D(filters = nfilters, kernel_size = 2, activation='relu'))
+            model.add(MaxPool1D(pool_size = 2))
+            model.add(Dropout(0.2))
+            
+            #Block 4      
+            model.add(Conv1D(filters = nfilters, kernel_size = 2, activation='relu'))
+            model.add(Dropout(0.2))    
+
+            #Block 5     
+            model.add(Conv1D(filters = nfilters, kernel_size = 2, activation='relu'))
+            model.add(MaxPool1D(pool_size = 2))
+            model.add(Dropout(0.2))      
+
+            #Block 6 
+            model.add(Conv1D(filters = nfilters, kernel_size = 2, activation='relu'))
+            model.add(Dropout(0.2))  
+
         #Block Prediction
         model.add(Flatten())
         model.add(Dense(128, activation='relu'))

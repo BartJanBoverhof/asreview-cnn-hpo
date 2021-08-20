@@ -158,7 +158,6 @@ class CNNBase(BaseTrainClassifier):
     def hpo(self):
         def objective(trial):
     
-            #HPO function
             nlayers = trial.suggest_int("nlayers",3,6)
             nfilters = trial.suggest_int("nfilters",50,220)
 
