@@ -24,10 +24,11 @@ setup(
     ],
     entry_points={
         'asreview.models.classifiers': [
-            'nb_example = asreviewcontrib.models.nb_default_param:NaiveBayesDefaultParamsModel',
+            'cnn-base = asreviewcontrib.models.classifiers.cnn_base:CNNBase',
+            'cnn-switch = asreviewcontrib.models.classifiers.cnn_switch:CNNSwitch',
         ],
         'asreview.models.feature_extraction': [
-            # define feature_extraction algorithms
+        
         ],
         'asreview.models.balance': [
             # define balance strategy algorithms
