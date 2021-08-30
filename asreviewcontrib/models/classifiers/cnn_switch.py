@@ -24,7 +24,6 @@ try:
     from tensorflow.keras.models import load_model
     from tensorflow.keras.layers import Dense
     from tensorflow.keras.layers import Conv1D
-    #from tensorflow.keras.layers import Reshape
     from tensorflow.keras.layers import MaxPool1D
     from tensorflow.keras.layers import Dropout
     from tensorflow.keras.layers import Flatten

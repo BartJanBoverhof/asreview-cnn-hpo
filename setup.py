@@ -24,7 +24,6 @@ setup(
     ],
     entry_points={
         'asreview.models.classifiers': [
-            'cnn-base = asreviewcontrib.models.classifiers.cnn_base:CNNBase',
             'cnn-switch = asreviewcontrib.models.classifiers.cnn_switch:CNNSwitch',
         ],
         'asreview.models.feature_extraction': [
