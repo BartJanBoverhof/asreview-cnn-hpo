@@ -20,7 +20,7 @@ python -m pip install git+https://github.com/BartJanBoverhof/asreview-cnn-hpo.gi
 The ``nb-cnn switch model`` is defined in [`asreviewcontrib/models/classifiers/cnn_switch.py`](asreviewcontrib/models/classifiers/cnn_switch.py) and can be used with `--model cnn-switch`.
 
 ## Performance 
-A simulation study assessing the performance of this model can be found in the included [report](https://github.com/BartJanBoverhof/asreview-cnn-hpo/blob/main/report/asreview_report_bartjan.pdf). In short, no direct evidence was found in favor of the current implementation of the `cnn-switch` with `wide-doc2vec` to outperform already implemented models such `nb` and `lr`, however, a differently optimised model may provide to show potential (see also: discussion section of the report).
+A simulation study assessing the performance of this model can be found in the included [report](https://github.com/BartJanBoverhof/asreview-cnn-hpo/blob/main/report/asreview_report_bartjan.pdf). In short, no direct evidence was found in favor of the current implementation of the `cnn-switch` with `wide-doc2vec` to outperform already implemented models such `nb` and `lr`, however, a differently optimised model may provide to show potential (see also the discussion section of the report).
 
 ## License 
 Apache-2.0 License 
