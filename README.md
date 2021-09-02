@@ -1,7 +1,7 @@
 # ASReview CNN with hyperparameter optimisation 
-This repository is a plugin containing a convolutional neural network (CNN) implementation that may be utilised when doing a systematic review with [ASReview](https://github.com/asreview). This plugin includes a model combining a Naive Bayes (NB) and CNN, starting with NB for the first X amount of iterations, and switching to a CNN hereafter. The current switchpoint is set at 500 iterations, but may be changed by respecified user. The CNN makes use of hyperparamater optimisation, which is repeated for every 300 iterations. The preferred feature extraction strategy for this model is [wide-doc2vec](https://github.com/JTeijema/) asreview-plugin-wide-doc2vec/)
+This repository contains an extention for [ASReview](https://github.com/asreview) ![logo](https://raw.githubusercontent.com/asreview/asreview-artwork/e2e6e5ea58a22077b116b9c3d2a15bc3fea585c7/SVGicons/IconELAS/ELASeyes24px24px.svg "ASReview") containing a convolutional neural network (CNN) model that may be utilised during a systematic review with [ASReview](https://github.com/asreview). This extention includes a model combining Naive Bayes (NB) and CNN classifiers, starting with Naive Bayes for the first set amount of iterations, and switching to a CNN thereafter. The current switchpoint is set at 500 iterations, but can be adjusted by the user. This CNN makes use of hyperparamater optimisation, which is set to repeat every 300 iterations. The preferred feature extraction strategy for this model is the [wide-doc2vec](https://github.com/JTeijema/asreview-plugin-wide-doc2vec) feature extractor.
 
-To read more about the rationale of utilising two models within one systematic review, please consult the [simulation report](https://github.com/BartJanBoverhof/asreview-cnn-hpo/blob/main/report/asreview_report_bartjan.pdf).
+To read more about the rationale behind utilising two models within one systematic review, please consult the [simulation report](https://github.com/BartJanBoverhof/asreview-cnn-hpo/blob/main/report/asreview_report_bartjan.pdf).
 
 ## Getting started
 Install the new classifiers with:
@@ -20,7 +20,7 @@ python -m pip install git+https://github.com/BartJanBoverhof/asreview-cnn-hpo.gi
 The ``nb-cnn switch model`` is defined in [`asreviewcontrib/models/classifiers/cnn_switch.py`](asreviewcontrib/models/classifiers/cnn_switch.py) and can be used with `--model cnn-switch`.
 
 ## Performance 
-A simulation study assessubg the performance of this model can be found [here](https://github.com/BartJanBoverhof/asreview-cnn-hpo/blob/main/report/asreview_report_bartjan.pdf). In short, no direct evidence was found in favor of the current implementation of the `cnn-switch` with `wide-doc2vec` to outperform already implemented models such `nb` and `lr`, however, a differently optimised model may provide to show potential (see also: discussion section of the aformentioned report).
+A simulation study assessing the performance of this model can be found in the included [report](https://github.com/BartJanBoverhof/asreview-cnn-hpo/blob/main/report/asreview_report_bartjan.pdf). In short, no direct evidence was found in favor of the current implementation of the `cnn-switch` with `wide-doc2vec` to outperform already implemented models such `nb` and `lr`, however, a differently optimised model may provide to show potential (see also: discussion section of the report).
 
 ## License 
 Apache-2.0 License 
