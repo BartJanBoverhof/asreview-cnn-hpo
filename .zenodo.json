@@ -1,0 +1,104 @@
+[
+   {
+      "conceptdoi":"10.5281/zenodo.5463528",
+      "conceptrecid":"5463528",
+      "created":"2021-09-06T06:47:54.308580",
+      "doi":"10.5281/zenodo.5463529",
+      "doi_url":"https://doi.org/10.5281/zenodo.5463529",
+      "files":[
+         {
+            "checksum":"52492529f16e55f2d53acbe4ac76e92b",
+            "filename":"BartJanBoverhof/asreview-cnn-hpo-v1.0.0.zip",
+            "filesize":416756,
+            "id":"da90a0d2-6df1-4649-a06f-996486dfca52",
+            "links":{
+               "download":"https://zenodo.org/api/files/fa6ac257-0a28-438c-9e7c-cb7f4b51cf79/BartJanBoverhof/asreview-cnn-hpo-v1.0.0.zip",
+               "self":"https://zenodo.org/api/deposit/depositions/5463529/files/da90a0d2-6df1-4649-a06f-996486dfca52"
+            }
+         }
+      ],
+      "id":5463529,
+      "links":{
+         "badge":"https://zenodo.org/badge/doi/10.5281/zenodo.5463529.svg",
+         "bucket":"https://zenodo.org/api/files/cf4804bf-506e-4d86-b972-cf58e71ba974",
+         "conceptbadge":"https://zenodo.org/badge/doi/10.5281/zenodo.5463528.svg",
+         "conceptdoi":"https://doi.org/10.5281/zenodo.5463528",
+         "discard":"https://zenodo.org/api/deposit/depositions/5463529/actions/discard",
+         "doi":"https://doi.org/10.5281/zenodo.5463529",
+         "edit":"https://zenodo.org/api/deposit/depositions/5463529/actions/edit",
+         "files":"https://zenodo.org/api/deposit/depositions/5463529/files",
+         "html":"https://zenodo.org/deposit/5463529",
+         "latest":"https://zenodo.org/api/records/5463529",
+         "latest_html":"https://zenodo.org/record/5463529",
+         "publish":"https://zenodo.org/api/deposit/depositions/5463529/actions/publish",
+         "record":"https://zenodo.org/api/records/5463529",
+         "record_html":"https://zenodo.org/record/5463529",
+         "self":"https://zenodo.org/api/deposit/depositions/5463529"
+      },
+      "metadata":{
+         "access_right":"open",
+         "communities":[
+            {
+               "identifier":"zenodo"
+            }
+         ],
+         "contributors":[
+            {
+               "affiliation":"Utrecht university",
+               "name":"Van de Schoot, Rens",
+               "orcid":"0000-0001-7736-2091",
+               "type":"Supervisor"
+            },
+            {
+               "affiliation":"Utrecht university",
+               "name":"Bagheri, Ayoub",
+               "orcid":"0000-0001-6366-2173",
+               "type":"Supervisor"
+            },
+            {
+               "affiliation":"Utrecht university",
+               "name":"De Bruin, Jonathan",
+               "orcid":"0000-0002-4297-0502",
+               "type":"DataManager"
+            }
+         ],
+         "creators":[
+            {
+               "affiliation":"Utrecht University",
+               "name":"Bart-Jan Boverhof",
+               "orcid":"0000-0002-9005-3952"
+            }
+         ],
+         "description":"<p>This repository contains ConvNet with hyperparamater optimisation model for conducting a systematic review with ASReview.&nbsp;</p>",
+         "doi":"10.5281/zenodo.5463529",
+         "keywords":[
+            "asreview systematic review cnn hpo convnet convolutional neural network deep learning machine learning"
+         ],
+         "license":"MIT",
+         "prereserve_doi":{
+            "doi":"10.5281/zenodo.5463529",
+            "recid":5463529
+         },
+         "publication_date":"2021-09-06",
+         "related_identifiers":[
+            {
+               "identifier":"https://github.com/BartJanBoverhof/asreview-cnn-hpo/tree/v1.0.0",
+               "relation":"isSupplementTo",
+               "scheme":"url"
+            }
+         ],
+         "thesis_supervisors":[
+            
+         ],
+         "title":"ASReview ConvNet with HPO",
+         "upload_type":"software",
+         "version":"v1.0.0"
+      },
+      "modified":"2021-09-06T08:01:31.410801",
+      "owner":249012,
+      "record_id":5463529,
+      "state":"inprogress",
+      "submitted":true,
+      "title":"ASReview ConvNet with HPO"
+   }
+]
