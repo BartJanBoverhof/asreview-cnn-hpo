@@ -1,5 +1,6 @@
 # ASReview CNN with hyperparameter optimisation 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5464656.svg)](https://doi.org/10.5281/zenodo.5464656)
+
 This repository contains an extention for [ASReview](https://github.com/asreview) ![logo](https://raw.githubusercontent.com/asreview/asreview-artwork/e2e6e5ea58a22077b116b9c3d2a15bc3fea585c7/SVGicons/IconELAS/ELASeyes24px24px.svg "ASReview") containing a convolutional neural network (CNN) model that may be utilised during a systematic review with [ASReview](https://github.com/asreview). This extention includes a model combining Naive Bayes (NB) and CNN classifiers, starting with Naive Bayes for the first set amount of iterations, and switching to a CNN thereafter. The current switchpoint is set at 500 iterations, but can be adjusted by the user. This CNN makes use of hyperparamater optimisation, which is set to repeat every 300 iterations. The preferred feature extraction strategy for this model is the [wide-doc2vec](https://github.com/JTeijema/asreview-plugin-wide-doc2vec) feature extractor.
 
 To read more about the rationale behind utilising two models within one systematic review, please consult the [simulation report](https://github.com/BartJanBoverhof/asreview-cnn-hpo/blob/main/report/asreview_report_bartjan.pdf).
